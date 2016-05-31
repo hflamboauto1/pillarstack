@@ -6,7 +6,7 @@ from functools import partial
 
 import yaml
 from jinja2 import FileSystemLoader, Environment, TemplateNotFound
-
+from salt.utils import traverse_dict_and_list
 
 log = logging.getLogger(__name__)
 strategies = ('overwrite', 'merge-first', 'merge-last', 'remove')
@@ -38,7 +38,6 @@ def ext_pillar(minion_id, pillar, *args, **kwargs):
         stack = _process_stack_cfg(cfg, stack, minion_id, pillar)
     return stack
 
-
 def _process_stack_cfg(cfg, stack, minion_id, pillar):
     log.debug('Config: {0}'.format(cfg))
     basedir, filename = os.path.split(cfg)
@@ -50,6 +49,8 @@ def _process_stack_cfg(cfg, stack, minion_id, pillar):
         "minion_id": minion_id,
         "pillar": pillar,
         })
+    # force pillar.get which doesn't return the truth
+    __salt__['pillar.get'] = partial(traverse_dict_and_list, pillar)
     for path in _parse_stack_cfg(jenv.get_template(filename).render(stack=stack)):
         try:
             log.debug('YAML: basedir={0}, path={1}'.format(basedir, path))
