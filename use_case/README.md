@@ -89,7 +89,7 @@ mysql:
 
 ## install this state generator
 
-`pillar/top.sls`:
+### `pillar/top.sls`
 
 ~~~yaml
 # vim: set ft=yaml:
