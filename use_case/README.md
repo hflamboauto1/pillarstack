@@ -1,8 +1,8 @@
 # Use case for pillarstack: higher level customers details
 
-**NOTE:** For this example, templating in NOT done by `ext_pillar` pillarstack.
+**NOTE:** For this example, templating is NOT done by `ext_pillar` [pillarstack](https://github.com/bbinet/pillarstack).
 
-This use case is currently run by salt state + jinja template generating pillar file on the saltmaster.
+This use case is currently run by salt state + jinja template generating pillar files on the saltmaster.
 
 Context: customers for a web agency are defined at higher level in `pillar/customers.sls`
 
