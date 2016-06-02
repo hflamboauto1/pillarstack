@@ -107,6 +107,28 @@ base:
     - auto.mysql_users
 ~~~
 
+### `state`
+
+Put `state/customers.sls` in your `file_roots:`, edit in to fix paths:
+
+* `pillar_dir` [line 23](/use_case/state/customers/init.sls#L23)
+* `target_dir` [line 24](/use_case/state/customers/init.sls#L24)
+
+run on the master (with care ;) )
+
+~~~bash
+salt-call state.apply customers
+~~~
+
+This should create the auto/ folder and files inside, which can be propagated that way.
+
+~~~bash
+salt '*' saltutil.refresh_pillar
+~~~
+
+More details in [`customers/init.sls`](/use_case/state/customers/init.sls#L8)
+
+
 ## pillarstack
 so…
 
