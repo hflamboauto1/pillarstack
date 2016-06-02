@@ -47,6 +47,7 @@ def _process_stack_cfg(cfg, stack, minion_id, pillar):
         "__opts__": __opts__,
         "__salt__": __salt__,
         "__grains__": __grains__,
+        "__stack__": { 'traverse': salt.utils.traverse_dict_and_list },
         "minion_id": minion_id,
         "pillar": pillar,
         })
